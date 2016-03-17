@@ -1,0 +1,131 @@
+DROP TABLE IF EXISTS tCartesPokemons;
+DROP TABLE IF EXISTS tCartesTrainers;
+DROP TABLE IF EXISTS tCartesEnergies;
+DROP TABLE IF EXISTS tCartes;
+DROP TABLE IF EXISTS tPokemons;
+DROP TABLE IF EXISTS tTrainers;
+DROP TABLE IF EXISTS tEnergies;
+DROP TABLE IF EXISTS tGenerations;
+DROP TABLE IF EXISTS tSeries;
+DROP TABLE IF EXISTS tRaretes;
+DROP TABLE IF EXISTS tTypes;
+
+CREATE TABLE IF NOT EXISTS tGenerations
+(
+	idGeneration INT AUTO_INCREMENT PRIMARY KEY,
+	numGeneration INT UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tTypes
+(
+	idType INT AUTO_INCREMENT PRIMARY KEY,
+	nom VARCHAR(30) UNIQUE NOT NULL,
+	image VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS tSeries
+(
+	idSerie INT AUTO_INCREMENT PRIMARY KEY,
+	nom VARCHAR(50) UNIQUE NOT NULL,
+	image VARCHAR(255),
+	nombreTotal INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tRaretes
+(
+	idRarete INT AUTO_INCREMENT PRIMARY KEY,
+	nom VARCHAR(50) UNIQUE NOT NULL,
+	image VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS tEnergies
+(
+	idEnergie INT AUTO_INCREMENT PRIMARY KEY,
+	nom VARCHAR(70) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tTrainers
+(
+	idTrainer INT AUTO_INCREMENT PRIMARY KEY,
+	nom VARCHAR(30) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tPokemons
+(
+	idPokemon INT AUTO_INCREMENT PRIMARY KEY,
+	idGeneration INT NOT NULL,
+	nom VARCHAR(15) UNIQUE NOT NULL,
+	numGlobal INT UNIQUE NOT NULL,
+	numGeneration VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS tCartes
+(
+	idCarte INT AUTO_INCREMENT PRIMARY KEY,
+	idSerie INT NOT NULL,
+	idRarete INT NOT NULL,
+	idType INT NOT NULL,
+	numSerie INT NOT NULL,
+	quantite INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS tCartesPokemons
+(
+	idCartePokemon INT AUTO_INCREMENT PRIMARY KEY,
+	idPokemon INT NOT NULL,
+	idCarte INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tCartesEnergies
+(
+	idCarteEnergie INT AUTO_INCREMENT PRIMARY KEY,
+	idEnergie INT,
+	idCarte INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tCartesTrainers
+(
+	idCarteTrainer INT AUTO_INCREMENT PRIMARY KEY,
+	idTrainer INT NOT NULL,
+	idCarte INT NOT NULL
+);
+
+ALTER TABLE tPokemons
+ADD CONSTRAINT tPokemons_tGenerations_FK
+FOREIGN KEY (idGeneration) REFERENCES tGenerations (idGeneration);
+
+ALTER TABLE tCartesTrainers
+ADD CONSTRAINT tCartesTrainers_tTrainers_FK
+FOREIGN KEY (idTrainer) REFERENCES tTrainers (idTrainer);
+
+ALTER TABLE tCartesTrainers
+ADD CONSTRAINT tCartesTrainers_tCartes_FK
+FOREIGN KEY (idCarte) REFERENCES tCartes (idCarte);
+
+ALTER TABLE tCartesPokemons
+ADD CONSTRAINT tCartesPokemons_tPokemons_FK
+FOREIGN KEY (idPokemon) REFERENCES tPokemons (idPokemon);
+
+ALTER TABLE tCartesPokemons
+ADD CONSTRAINT tCartesPokemons_tCartes_FK
+FOREIGN KEY (idCarte) REFERENCES tCartes (idCarte);
+
+ALTER TABLE tCartesEnergies
+ADD CONSTRAINT tCartesEnergies_tEnergies_FK
+FOREIGN KEY (idEnergie) REFERENCES tEnergies (idEnergie);
+
+ALTER TABLE tCartesEnergies
+ADD CONSTRAINT tCartesEnergies_tCartes_FK
+FOREIGN KEY (idCarte) REFERENCES tCartes (idCarte);
+
+ALTER TABLE tCartes
+ADD CONSTRAINT tCartes_tSeries_FK
+FOREIGN KEY (idSerie) REFERENCES tSeries (idSerie);
+
+ALTER TABLE tCartes
+ADD CONSTRAINT tCartes_tRaretes_FK
+FOREIGN KEY (idRarete) REFERENCES tRaretes (idRarete);
+
+ALTER TABLE tCartes
+ADD CONSTRAINT tCartes_tTypes_FK
+FOREIGN KEY (idType) REFERENCES tTypes (idType);

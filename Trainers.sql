@@ -1,0 +1,50 @@
+INSERT INTO tTrainers
+(nom)
+VALUES
+("Clefairy Doll"),
+("Computer Search"),
+("Devolution Spray"),
+("Imposter Professor Oak"),
+("Impostor Professor Oak"),
+("Item Finder"),
+("Lass"),
+("Pokémon Breeder"),
+("Pokémon Trader"),
+("Scoop Up"),
+("Super Energy Removal"),
+("Defender"),
+("Energy Retrieval"),
+("Full Heal"),
+("Maintenance"),
+("PlusPower"),
+("Pokémon Center"),
+("Pokémon Flute"),
+("Pokédex"),
+("Professor Oak"),
+("Revive"),
+("Super Potion"),
+("Bill"),
+("Energy Removal"),
+("Gust of Wind"),
+("Potion"),
+("Switch"),
+("Poké Ball"),
+("Mr. Fuji"),
+("Energy Search"),
+("Gambler"),
+("Recycle"),
+("The Boss's Way"),
+("Here Comes Team Rocket!"),
+("Rocket's Sneak Attack"),
+("Imposter Oak's Revenge"),
+("Nightly Garbage Run"),
+("Goop Gas Attack"),
+("Sleep!"),
+("Challenge!"),
+("Digger"),
+("Mysterious Fossil");
+
+INSERT INTO tTrainers
+(nom)
+VALUES
+();
