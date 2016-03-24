@@ -1,3 +1,10 @@
+DROP DATABASE IF EXISTS pokemonChecklist;
+CREATE DATABASE IF NOT EXISTS pokemonChecklist
+CHARACTER SET utf8
+COLLATE utf8_bin;
+
+USE pokemonChecklist;
+
 DROP TABLE IF EXISTS tCartesPokemons;
 DROP TABLE IF EXISTS tCartesTrainers;
 DROP TABLE IF EXISTS tCartesEnergies;
@@ -38,6 +45,12 @@ CREATE TABLE IF NOT EXISTS tRaretes
 	image VARCHAR(255)
 );
 
+CREATE TABLE IF NOT EXISTS tSpecialites
+(
+	idSpecialite INT AUTO_INCREMENT PRIMARY KEY,
+	nom VARCHAR(50) UNIQUE NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS tEnergies
 (
 	idEnergie INT AUTO_INCREMENT PRIMARY KEY,
@@ -73,7 +86,8 @@ CREATE TABLE IF NOT EXISTS tCartesPokemons
 (
 	idCartePokemon INT AUTO_INCREMENT PRIMARY KEY,
 	idPokemon INT NOT NULL,
-	idCarte INT NOT NULL
+	idCarte INT NOT NULL,
+	idSpecialite INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tCartesEnergies
@@ -105,6 +119,10 @@ FOREIGN KEY (idCarte) REFERENCES tCartes (idCarte);
 ALTER TABLE tCartesPokemons
 ADD CONSTRAINT tCartesPokemons_tPokemons_FK
 FOREIGN KEY (idPokemon) REFERENCES tPokemons (idPokemon);
+
+ALTER TABLE tCartesPokemons
+ADD CONSTRAINT tCartesPokemons_tSpecialites_FK
+FOREIGN KEY (idSpecialite) REFERENCES tSpecialites (idSpecialite);
 
 ALTER TABLE tCartesPokemons
 ADD CONSTRAINT tCartesPokemons_tCartes_FK

@@ -43,8 +43,3 @@ VALUES
 ("Challenge!"),
 ("Digger"),
 ("Mysterious Fossil");
-
-INSERT INTO tTrainers
-(nom)
-VALUES
-();
